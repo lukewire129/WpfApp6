@@ -1,0 +1,63 @@
+﻿<Window
+    x:Class="WpfApp6.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ControlTemplate x:Key="ButtonTemplate" TargetType="{x:Type Button}">
+            <Border
+                x:Name="border"
+                Margin="0,-1"
+                Padding="0"
+                Background="{TemplateBinding Background}"
+                BorderBrush="White"
+                BorderThickness="1"
+                CornerRadius="3"
+                SnapsToDevicePixels="true">
+                <ContentPresenter
+                    x:Name="contentPresenter"
+                    Margin="{TemplateBinding Padding}"
+                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                    Focusable="False"
+                    RecognizesAccessKey="True"
+                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+            </Border>
+            <ControlTemplate.Triggers>
+                <!--<Trigger Property="IsDefaulted" Value="true">
+                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                </Trigger>-->
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="red" />
+                    <Setter TargetName="border" Property="BorderBrush" Value="red" />
+                    <Setter TargetName="border" Property="Background" Value="red" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Background" Value="#FFC4E5F6" />
+                    <Setter TargetName="border" Property="BorderBrush" Value="#FF2C628B" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Background" Value="#212730" />
+                    <Setter TargetName="border" Property="BorderBrush" Value="#020B11" />
+                    <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="#FF838383" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+    <Grid>
+        <Button x:Name="btn" Template="{StaticResource ButtonTemplate}">
+            <Label
+                Width="100"
+                Height="59"
+                Background="Blue"
+                Content="hihi"
+                Foreground="{Binding ElementName=btn, Path=Background}"
+                IsHitTestVisible="False" />
+        </Button>
+    </Grid>
+</Window>
